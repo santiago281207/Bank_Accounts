@@ -33,9 +33,9 @@ int main()
 {
 	struct ContaBancaria Contas[MAX];
 	int contador_password_change = 0, contacto_check = 0;	//Contar quantas tentativas de mudar a password ja aconteceram
-	int qtd_contas = 0, contas_criadas = 0;	
+	int qtd_contas = 0, contas_criadas = 0;
 	int pos_conta = 0;
-	int qtd_enviar_check,pass_change_check;	//Mostra se a quantidade a enviar e valida
+	int qtd_enviar_check, pass_change_check;	//Mostra se a quantidade a enviar e valida
 	double quantia_levantar, quantia_depositar;	//Quantias do deposito
 	double quantia_enviar;
 	int remetente, destinatario, passcheck;	//Quantia de envio e posicoes das contas e verificacao de password certa
@@ -45,7 +45,7 @@ int main()
 	char nome_conta_saldo[NAME], pass_conta_saldo[PASS_LENGHT];  //Nome da conta para verificar saldo e password
 	char nome_conta_change[NAME], pass_conta_change[PASS_LENGHT], choice_maker = ' ', contacto_confirm[10];	//Nome da conta que vai mudar a password decidir mudar para confirmacao por contacto e se contacto esta certo
 	system("color B");      //Mudar a cor para azul clarinho
-	
+
 	ResetSaldos(Contas, MAX);
 
 	while (1)    //Ciclo que roda o banco
@@ -54,7 +54,7 @@ int main()
 
 		do
 		{
-			scanf_s("%c", &tarefa_menu,1);
+			scanf_s("%c", &tarefa_menu, 1);
 			getchar();
 			if (EntreAB(tarefa_menu, '1', '7') == 0)
 			{
@@ -85,7 +85,7 @@ int main()
 
 			do
 			{
-				scanf_s("%c", &tarefa_criador,1);
+				scanf_s("%c", &tarefa_criador, 1);
 				getchar();
 
 				if (EntreAB(tarefa_criador, '1', '3') == 0)
@@ -117,14 +117,14 @@ int main()
 				} while (EntreAB(qtd_contas, 1, MAX) == 0);
 
 
-				for (;contas_criadas < qtd_contas;) //Criar contas ate a quantidade de contas pretendida
+				for (; contas_criadas < qtd_contas;) //Criar contas ate a quantidade de contas pretendida
 				{
 					do
 					{
 						printf("Indique o nome do proprietario desta conta: ");
 						fgets(Contas[contas_criadas].nome, NAME, stdin);    //Ler nome da conta
 						Contas[contas_criadas].nome[strcspn(Contas[contas_criadas].nome, "\n")] = '\0';     //Retirar o "\n" da string do nome
-						
+
 						if (NameCheck(Contas, Contas[contas_criadas].nome, contas_criadas) == 0)    //Verficar se o nome e valido
 						{
 							printf("Nome invalido!\n");
@@ -143,11 +143,11 @@ int main()
 						}
 					} while (Password_Strength(Contas[contas_criadas].pass) != 1);
 
-					
+
 					do
 					{
 						printf("Indique o seu numero de contacto:+351");
-						scanf_s("%s", Contas[contas_criadas].contacto,10);  //Ler numero de telemovel
+						scanf_s("%s", Contas[contas_criadas].contacto, 10);  //Ler numero de telemovel
 						getchar();
 						if (ContactoVerif(Contas[contas_criadas].contacto) == 0)   //Verificar se numero e valido
 						{
@@ -155,7 +155,7 @@ int main()
 						}
 					} while (ContactoVerif(Contas[contas_criadas].contacto) == 0);  //Verificar se o numero de contacto e valido
 
-					printf("Conta de %s criada com sucesso!\n", Contas[contas_criadas].nome);
+					printf("Conta de %s criada com sucesso!\n\n", Contas[contas_criadas].nome);
 					contas_criadas++;
 				}
 				break;  //FIM DE CRIADOR DE CONTAS EM SERIE
@@ -166,7 +166,7 @@ int main()
 					printf("Indique o nome do proprietario desta conta: ");
 					fgets(Contas[contas_criadas].nome, NAME, stdin);    //Ler nome da conta
 					Contas[contas_criadas].nome[strcspn(Contas[contas_criadas].nome, "\n")] = '\0';     //Retirar o "\n" da string
-				 
+
 					if (NameCheck(Contas, Contas[contas_criadas].nome, contas_criadas) == 0)    //Verficar se o nome e valido
 					{
 						printf("Nome invalido!\n");
@@ -188,7 +188,7 @@ int main()
 				do
 				{
 					printf("Indique o seu numero de contacto:+351");
-					scanf_s("%s", &Contas[contas_criadas].contacto,10);  //Ler numero de telemovel
+					scanf_s("%s", &Contas[contas_criadas].contacto, 10);  //Ler numero de telemovel
 					getchar();
 
 					if (ContactoVerif(Contas[contas_criadas].contacto) == 0)   //Verificar se numero e valido
@@ -202,10 +202,10 @@ int main()
 
 				break;      //FIM DO CRIADOR SINGULAR
 			}
-			break;      
+			break;
 
 		case '2':       //Consultar saldo password necessaria
-				printf(" === CONSULTADOR DE BANANAS === \n");
+			printf(" === CONSULTADOR DE BANANAS === \n");
 			do
 			{
 				printf("Digite quit para sair.\n");
@@ -213,7 +213,7 @@ int main()
 				fgets(nome_conta_saldo, NAME, stdin);
 				RemoveInvalid(nome_conta_saldo);
 
-				if (_stricmp(nome_conta_saldo,"quit") == 0)
+				if (_stricmp(nome_conta_saldo, "quit") == 0)
 				{
 					break;
 				}
@@ -223,8 +223,8 @@ int main()
 				}
 			} while (ContaFinder(Contas, nome_conta_saldo, contas_criadas) == -1);  //Repetir ate encontrar conta
 
-			if (_stricmp(nome_conta_saldo,"quit") == 0)
-			{	
+			if (_stricmp(nome_conta_saldo, "quit") == 0)
+			{
 				printf("Saindo...\n");
 				Sleep(1000);
 				break;
@@ -233,22 +233,22 @@ int main()
 			pos_conta = ContaFinder(Contas, nome_conta_saldo, contas_criadas);
 
 			do
-			{   
+			{
 				printf("Digite a sua password: ");
 				fgets(pass_conta_saldo, PASS_LENGHT, stdin);
 				RemoveInvalid(pass_conta_saldo);		//Remover o \n no fim da string
 
-				if (_stricmp(pass_conta_saldo,"quit") == 0)
+				if (_stricmp(pass_conta_saldo, "quit") == 0)
 				{
 					break;
 				}
-				else if (PasswordCheck(Contas,pass_conta_saldo,pos_conta) == 0)		//Se a password estiver errada
+				else if (PasswordCheck(Contas, pass_conta_saldo, pos_conta) == 0)		//Se a password estiver errada
 				{
 					printf("Password incorreta. Tente novamente.\n");
 				}
 			} while (PasswordCheck(Contas, pass_conta_saldo, pos_conta) == 0);		//Repetir ate estar certa
 
-			if (_stricmp(pass_conta_saldo,"sair") == 0)
+			if (_stricmp(pass_conta_saldo, "sair") == 0)
 			{
 				printf("Saindo...\n");
 				Sleep(1000);
@@ -256,7 +256,7 @@ int main()
 			}
 			else
 			{
-				printf("As suas bananas: %.2lf\n", Contas[pos_conta].saldo);
+				printf("As suas bananas: %.2lf\n\n", Contas[pos_conta].saldo);
 			}
 			break;      //FIM CONSULTAR SALDO
 
@@ -264,10 +264,10 @@ int main()
 			printf(" === LEVANTAR BANANAS === \n");
 			do
 			{
-				printf("Digite quit para sair.\n");
+				printf("\nDigite quit para sair.\n");
 				printf("Nome da conta: ");
 				fgets(nome_conta_saldo, NAME, stdin);
-				RemoveInvalid(nome_conta_saldo);
+				RemoveInvalid(nome_conta_saldo);	//Remover o \n do fim da string
 
 				if (_stricmp(nome_conta_saldo, "quit") == 0)
 				{
@@ -327,11 +327,15 @@ int main()
 					{
 						printf("Quantia invalida!\n");
 					}
+					else if (quantia_levantar > Contas[pos_conta].saldo)
+					{
+						printf("Saldo insuficiente.\n");
+					}
 					else
 					{
 						Contas[pos_conta].saldo -= quantia_levantar;	//Reduzir saldo
-						printf("%.2lf foi retirado da sua conta!\n", quantia_levantar);	
-						printf("Saldo atual: %.2lf\n", Contas[contas_criadas].saldo);	//Mostrar o saldo depois do levantamento
+						printf("%.2lf foi retirado da sua conta!\n", quantia_levantar);
+						printf("Saldo atual: %.2lf\n\n", Contas[contas_criadas].saldo);	//Mostrar o saldo depois do levantamento
 						Sleep(2000);
 					}
 				} while (quantia_levantar <= 0);	//Repetir ate ler um valor valido
@@ -359,7 +363,7 @@ int main()
 
 			if (_stricmp(nome_conta_saldo, "quit") == 0)	//Saindo
 			{
-				printf("Saindo...\n");
+				printf("Saindo...\n\n");
 				Sleep(1000);
 				break;
 			}
@@ -384,7 +388,7 @@ int main()
 
 			if (_stricmp(pass_conta_saldo, "sair") == 0)	//Saindo da tarefa
 			{
-				printf("Saindo...\n");
+				printf("Saindo...\n\n");
 				Sleep(1000);
 				break;
 			}
@@ -401,9 +405,9 @@ int main()
 				{
 					Contas[pos_conta].saldo += quantia_depositar;		//Adicionar o deposito ao saldo
 					printf("%.2lf foi depositado da sua conta!\n", quantia_depositar);
-					printf("Saldo atual: %.2lf\n", Contas[pos_conta].saldo);	//Mostrar saldo depois do deposito
+					printf("Saldo atual: %.2lf\n\n", Contas[pos_conta].saldo);	//Mostrar saldo depois do deposito
 					getchar();
-					Sleep(2000);
+					Sleep(1000);
 				}
 			} while (quantia_depositar < 0);
 
@@ -446,7 +450,7 @@ int main()
 
 				if (_stricmp(pass_remetente, "quit") == 0)	//Verificar se é para sair da tarefa
 				{
-					printf("Saindo...\n");
+					printf("Saindo...\n\n");
 					Sleep(1000);
 					break;
 				}
@@ -458,7 +462,7 @@ int main()
 
 			if (_stricmp(pass_remetente, "quit") == 0)	//Sair da tarefa
 			{
-				printf("Saindo...\n");
+				printf("Saindo...\n\n");
 				Sleep(1000);
 				break;
 			}
@@ -486,19 +490,19 @@ int main()
 				}
 			} while (destinatario == -1);
 
-			if (_stricmp(nome_destinatario,"quit") == 0)
+			if (_stricmp(nome_destinatario, "quit") == 0)
 			{
-				printf("Saindo...\n");
+				printf("Saindo...\n\n");
 				Sleep(1000);
 				break;
 			}
 
 			do
-			{	
+			{
 				if (Contas[remetente].saldo <= 0)	//Nao tem saldo suficiente
 				{
 					printf("Nao tem dinheiro suficiente para efetuar uma transacao.\n");
-					printf("Saindo...\n");
+					printf("Saindo...\n\n");
 					Sleep(1000);
 					break;
 				}
@@ -508,31 +512,32 @@ int main()
 					scanf("%lf", &quantia_enviar);
 					qtd_enviar_check = QtdEnviarValid(Contas[remetente].saldo, quantia_enviar);
 
-					if (qtd_enviar_check != 1)
+					if (qtd_enviar_check == 0)
 					{
-						if (qtd_enviar_check == 0)
-						{
-							printf("Quantia invalida!\n");
-						}
-						else
-						{
-							printf("Saldo insuficiente!\n");
-						}
+						printf("Quantidade  invalida!\n");
 					}
-					else
+					else if (qtd_enviar_check == -1)
 					{
+						printf("Saldo insuficiente!\n");
+					}
+					else if(qtd_enviar_check == 1)
+					{
+						printf("%.2lf foi enviado para %s.\n", quantia_enviar,Contas[destinatario].nome);
 						Contas[remetente].saldo -= quantia_enviar;	//Retirar quantia enviada ao remetente
 						Contas[destinatario].saldo += quantia_enviar;	//Adicionar quantia enviada ao desstinatario
+						printf("Saldo atual: %.2lf\n\n", Contas[remetente].saldo);
 					}
 				}
-			} while (qtd_enviar_check == 0);
+			} while (qtd_enviar_check == 0 || qtd_enviar_check == -1);
 
 			if (Contas[remetente].saldo <= 0)	//Sair da tarefa
 			{
 				break;
 			}
-			printf("$%.2lf enviado para %s com sucesso!\n",quantia_enviar, Contas[destinatario].nome);
-			printf("\n");
+
+			printf("Saindo...\n\n");
+			Sleep(1000);
+			printf("\n\n");
 			getchar();
 			break;      //FIM TRANSFERENCIA DINHEIRO
 
@@ -559,7 +564,7 @@ int main()
 
 			if (_stricmp(nome_conta_change, "quit") == 0)	//Sair da tarefa
 			{
-				printf("Saindo...\n");
+				printf("Saindo...\n\n");
 				Sleep(1000);
 				break;
 			}
@@ -567,7 +572,7 @@ int main()
 			do
 			{
 				printf("Password: ");
-				fgets(pass_conta_change, PASS_LENGHT, stdin);	
+				fgets(pass_conta_change, PASS_LENGHT, stdin);
 				RemoveInvalid(pass_conta_change);	//Remover \n da string
 
 				pass_change_check = PasswordCheck(Contas, pass_conta_change, pos_conta);	//Ver se password esta certa
@@ -580,33 +585,45 @@ int main()
 				{
 					printf("Password incorreta. Tente novamente.\n");
 				}
-				else if(pass_change_check == 1)
+				else if (pass_change_check == 1)
 				{
 					break;
 				}
 				contador_password_change++;
-				do
+
+				if (contador_password_change % 3 == 0)
 				{
-					if (contador_password_change % 3 == 0)
+					do
 					{
 						printf("Deseja verificar o perfil pelo numero de contacto?\n[S/N] ");
 						scanf("%c", &choice_maker);	//Ler a escolha
 						getchar();
-						if (toupper(choice_maker) == 'S')	//Quer mudar
+						if (toupper(choice_maker) == 'S' || toupper(choice_maker) == 'N')	//Quer mudar
 						{
 							break;
-						}
-						else if (toupper(choice_maker) == 'N')	//Nao quis mudar 
-						{
-							continue;
 						}
 						else		//Introduziu decisao errada
 						{
 							printf("Introduza uma decisao valida [S/N].\n");
 						}
+						if (toupper(choice_maker) == 'S')
+						{
+							break;
+						}
+					} while (toupper(choice_maker) != 'S' || toupper(choice_maker) != 'N');
+
+					if (toupper(choice_maker) == 'S')
+					{
+						break;
 					}
-				} while (toupper(choice_maker) != 'S' || toupper(choice_maker) != 'N');
+					else if (toupper(choice_maker) == 'N')
+					{
+						continue;
+					}
+				}
+
 			} while (pass_change_check == 0);
+				
 
 
 			if (_stricmp(pass_conta_change, "quit") == 0)	//Sair da tarefa
@@ -623,14 +640,13 @@ int main()
 					printf("Numero de contacto:+351");
 					fgets(contacto_confirm, 10, stdin);
 					RemoveInvalid(contacto_confirm);	//Remover o \n no fim da string
-
 					contacto_check = ContactoConfirm(Contas, contacto_confirm, pos_conta);
 
 					if (_stricmp(contacto_confirm, "quit") == 0)
 					{
 						break;
 					}
-					else if (contacto_check == 0)		
+					else if (contacto_check == 0)
 					{
 						printf("Numero de contacto errado. Tente novamente.\n");
 					}
@@ -647,32 +663,34 @@ int main()
 				do
 				{
 					printf("Nova password (minimo 8 caracteres): ");
-					fgets(Contas[contas_criadas].pass, PASS_LENGHT, stdin);
+					fgets(Contas[pos_conta].pass, PASS_LENGHT, stdin);
 					RemoveInvalid(Contas[pos_conta].pass);		//Remover \n da string
 
-					if (Password_Strength(Contas[contas_criadas].pass) != 1)
+					if (Password_Strength(Contas[pos_conta].pass) != 1)
 					{
 						printf("Password muito fraca!\nTente novamente.\n");
 					}
-				} while (Password_Strength(Contas[contas_criadas].pass) != 1);      //Verificar se a password passa nos requisitos pedidos
+				} while (Password_Strength(Contas[pos_conta].pass) != 1);      //Verificar se a password passa nos requisitos pedidos
 			}
 
 			if (contacto_check == 1)	//Acertou numero de contacto
 			{
 				do
 				{
+					getchar();
 					printf("Nova password (minimo 8 caracteres): ");
-					fgets(Contas[contas_criadas].pass, PASS_LENGHT, stdin);
+					fgets(Contas[pos_conta].pass, PASS_LENGHT, stdin);
 					RemoveInvalid(Contas[pos_conta].pass);		//Remover \n da string
 
-					if (Password_Strength(Contas[contas_criadas].pass) != 1)
+					if (Password_Strength(Contas[pos_conta].pass) != 1)
 					{
 						printf("Password muito fraca!\nTente novamente.\n");
 					}
-				} while (Password_Strength(Contas[contas_criadas].pass) != 1);      //Verificar se a password passa nos requisitos pedidos
+				} while (Password_Strength(Contas[pos_conta].pass) != 1);      //Verificar se a password passa nos requisitos pedidos
 			}
 
 			printf("\n");
+			contador_password_change = 0;
 			break;      //FIM ALTERAR PASSWORD
 		}
 	}
@@ -684,7 +702,7 @@ void Menu(int contas_criadas)
 	puts(" === BEM VINDO AO BANCO DAS BANANAS === ");
 	puts("----------------------------------------");
 	puts("|Selecione uma opcao das abaixo:       |");
-	printf("|1. Adicionar contas bananarias(%d/%d) |\n",contas_criadas,MAX);   //1 Adicionar conta
+	printf("|1. Adicionar contas bananarias(%d/%d) |\n", contas_criadas, MAX);   //1 Adicionar conta
 	puts("|2. Consultar bananas                  |");   //2 Consultar saldo
 	puts("|3. Levantar bananas                   |");   //3 Levantar dinheiro
 	puts("|4. Depositar bananas                  |");   //4 Depositar dinheiro
@@ -726,7 +744,7 @@ int Password_Strength(char* password)
 	}
 	else
 	{
-		for (i = 0;i < tamanho;i++)
+		for (i = 0; i < tamanho; i++)
 		{
 			if (IsInString(letras_lower, password[i]) == 1) //Verificar se o caracter atual e minuscula
 				letras_lower_count = 1;
@@ -753,7 +771,7 @@ int NameCheck(struct ContaBancaria contas[], char name[], int size)
 
 	int i = 0;
 
-	for (i = 0;i < size;i++)
+	for (i = 0; i < size; i++)
 	{
 		if (_stricmp(contas[i].nome, name) == 0)    //Verificar se o nome introduzido ja existe na base de dados case-insensitive
 		{
@@ -767,14 +785,14 @@ int ContactoVerif(char contacto[])
 {
 	int i = 0;
 	char nums[] = { "0123456789" };
-	for (i = 0;contacto[i] != '\0';i++)
+	for (i = 0; contacto[i] != '\0'; i++)
 	{
 		if (IsInString(nums, contacto[i]) == 0)
 		{
 			return 0;
 		}
 	}
-	
+
 	return i == 9;
 }
 
@@ -782,7 +800,7 @@ int IsInString(char string[], char value)
 {
 	size_t i = 0;
 
-	for (i = 0;string[i] != '\0';i++)
+	for (i = 0; string[i] != '\0'; i++)
 	{
 		if (string[i] == value)
 		{
@@ -797,7 +815,7 @@ int ContaFinder(struct ContaBancaria contas[], char name[], int size)	//-1 se na
 	//Encontrar o nome do utilizador
 	int i = 0;
 
-	for (i = 0;i < size;i++)
+	for (i = 0; i < size; i++)
 	{
 		if (strcmp(contas[i].nome, name) == 0)
 		{
@@ -817,11 +835,11 @@ int PasswordCheck(struct ContaBancaria contas[], char pass[], int conta)
 	return 0;
 }
 
-void RemoveInvalid(char word[]) 
+void RemoveInvalid(char word[])
 {
 	int i = 0;
 
-	for (i = 0;word[i] != '\0';i++)
+	for (i = 0; word[i] != '\0'; i++)
 	{
 		if (word[i] == '\n')
 		{
@@ -830,7 +848,7 @@ void RemoveInvalid(char word[])
 	}
 }
 
-int QtdEnviarValid(double saldo, double quantia_enviar) 
+int QtdEnviarValid(double saldo, double quantia_enviar)
 {
 	//Verifica se a quantia de dinheiro a enviar e valida
 
@@ -852,7 +870,7 @@ void ResetSaldos(struct ContaBancaria contas[], int size)
 {
 	int i = 0;
 
-	for (i = 0;i < size;i++)
+	for (i = 0; i < size; i++)
 	{
 		contas[i].saldo = 0;
 	}
