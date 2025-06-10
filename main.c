@@ -335,7 +335,7 @@ int main()
 					{
 						Contas[pos_conta].saldo -= quantia_levantar;	//Reduzir saldo
 						printf("%.2lf foi retirado da sua conta!\n", quantia_levantar);
-						printf("Saldo atual: %.2lf\n\n", Contas[contas_criadas].saldo);	//Mostrar o saldo depois do levantamento
+						printf("Saldo atual: %.2lf\n\n", Contas[pos_conta].saldo);	//Mostrar o saldo depois do levantamento
 						Sleep(2000);
 					}
 				} while (quantia_levantar <= 0);	//Repetir ate ler um valor valido
